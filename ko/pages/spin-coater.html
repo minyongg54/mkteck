@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>첨단 스핀 코터 - MKTECH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+    .product-hero { padding-top: 120px; padding-bottom: 80px; background: linear-gradient(180deg, var(--darkest) 0%, var(--dark) 100%); position: relative; overflow: hidden; }
+    .product-hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 30% 50%, rgba(79,195,247,0.05) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(0,188,212,0.04) 0%, transparent 50%); }
+    .product-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 40px; position: relative; }
+    .product-breadcrumb a { color: rgba(255,255,255,0.4); transition: color var(--transition); }
+    .product-breadcrumb a:hover { color: var(--primary); }
+    .product-breadcrumb span { color: rgba(255,255,255,0.7); }
+    .product-hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; }
+    .product-hero-label { display: inline-block; font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; padding: 6px 16px; border: 1px solid rgba(79,195,247,0.3); border-radius: 20px; }
+    .product-hero-title { font-size: 48px; font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 24px; }
+    .product-hero-desc { font-size: 17px; color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 40px; }
+    .product-hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+    .product-stat { padding: 20px; background: rgba(79,195,247,0.05); border: 1px solid rgba(79,195,247,0.1); border-radius: 12px; text-align: center; }
+    .product-stat-value { font-size: 28px; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+    .product-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
+    .product-hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 14px 36px; background: transparent; color: white; font-size: 13px; font-weight: 600; border-radius: 50px; border: 1px solid rgba(79,195,247,0.5); cursor: pointer; letter-spacing: 2px; transition: all var(--transition); }
+    .product-hero-cta:hover { background: var(--primary); color: var(--dark); border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(79,195,247,0.2); }
+    .product-hero-image { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.4); border: 1px solid rgba(79,195,247,0.1); }
+    .product-hero-image img { width: 100%; height: auto; display: block; }
+    .product-hero-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, transparent 70%, rgba(10,22,40,0.3) 100%); pointer-events: none; }
+    .features-section { padding: 100px 0; background: var(--white); }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 64px; }
+    .feature-card { padding: 40px 32px; border-radius: 16px; background: var(--white); border: 1px solid rgba(0,0,0,0.06); transition: all 0.4s ease; }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-color: rgba(79,195,247,0.2); }
+    .feature-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--dark), #1a3a5a); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--primary); margin-bottom: 24px; }
+    .feature-title { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+    .feature-desc { font-size: 15px; color: var(--gray); line-height: 1.7; }
+    .specs-section { padding: 100px 0; background: var(--darker); }
+    .specs-table-wrapper { margin-top: 64px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(79,195,247,0.1); }
+    .specs-table { width: 100%; border-collapse: collapse; }
+    .specs-table th, .specs-table td { padding: 18px 28px; text-align: left; font-size: 15px; border-bottom: 1px solid rgba(79,195,247,0.08); }
+    .specs-table th { background: rgba(79,195,247,0.08); color: var(--primary); font-weight: 600; font-size: 13px; letter-spacing: 1px; width: 35%; }
+    .specs-table td { color: rgba(255,255,255,0.7); background: rgba(10,22,40,0.5); }
+    .specs-table tr:last-child th, .specs-table tr:last-child td { border-bottom: none; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary); font-size: 14px; font-weight: 600; letter-spacing: 1px; transition: all var(--transition); margin-top: 40px; }
+    .back-link:hover { gap: 12px; }
+    @media (max-width: 1024px) { .product-hero-inner { grid-template-columns: 1fr; gap: 40px; } .product-hero-title { font-size: 36px; } .features-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .product-hero { padding-top: 100px; padding-bottom: 60px; } .product-hero-title { font-size: 28px; } .product-hero-stats { grid-template-columns: 1fr; } .features-grid { grid-template-columns: 1fr; } .specs-table th, .specs-table td { padding: 14px 16px; font-size: 14px; } }
+  </style>
+</head>
+<body>
+  <header class="header scrolled" id="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><span class="logo-text">MKTECH</span></a>
+      <nav class="nav" id="nav">
+        <div class="nav-item"><a href="../index.html#about" class="nav-link">회사소개</a></div>
+        <div class="nav-item"><a href="../index.html#products" class="nav-link">제품</a></div>
+        <div class="nav-item"><a href="../index.html#process" class="nav-link">기술역량</a></div>
+        <div class="nav-item"><a href="../index.html#news" class="nav-link">뉴스룸</a></div>
+        <div class="nav-item"><a href="../index.html#contact" class="nav-link">문의하기</a></div>
+      </nav>
+      <div class="header-actions">
+        <a href="../../pages/spin-coater.html" class="lang-switch">EN</a>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="product-hero">
+    <div class="container">
+      <div class="product-breadcrumb">
+        <a href="../index.html">홈</a><span>/</span>
+        <a href="../index.html#products">제품</a><span>/</span>
+        <span>첨단 스핀 코터</span>
+      </div>
+      <div class="product-hero-inner">
+        <div class="product-hero-content">
+          <span class="product-hero-label">Coater</span>
+          <h1 class="product-hero-title">첨단 스핀 코터</h1>
+          <p class="product-hero-desc">
+            차세대 반도체 리소그래피를 위한 초고정밀 스핀 코팅 시스템입니다.
+            독자 개발한 디스펜스 노즐 기술과 폐루프 스핀 속도 제어로
+            탁월한 막 두께 균일도를 달성하며, Sub-5nm 공정 노드의 포토레지스트
+            코팅을 최소한의 약액 소모로 구현합니다.
+          </p>
+          <div class="product-hero-stats">
+            <div class="product-stat">
+              <div class="product-stat-value">&lt;0.5%</div>
+              <div class="product-stat-label">두께 균일도</div>
+            </div>
+            <div class="product-stat">
+              <div class="product-stat-value">300mm</div>
+              <div class="product-stat-label">웨이퍼 사이즈</div>
+            </div>
+            <div class="product-stat">
+              <div class="product-stat-value">180+</div>
+              <div class="product-stat-label">WPH 처리량</div>
+            </div>
+          </div>
+          <a href="mailto:mktech1@mktechinc.kr" class="product-hero-cta">
+            견적 요청
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="product-hero-image">
+          <img src="../../images/spin-coater.png" alt="첨단 스핀 코터">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Key Features</span>
+        <h2 class="section-title">초고정밀 코팅 기술</h2>
+        <p class="section-desc">첨단 반도체 리소그래피를 위한 업계 최고의 스핀 코팅 기술</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <h3 class="feature-title">높은 처리량</h3>
+          <p class="feature-desc">최적화된 스핀-디스펜스 사이클과 듀얼 암 웨이퍼 핸들링으로 시간당 180매 이상의 웨이퍼를 처리합니다.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <h3 class="feature-title">정밀 디스펜스</h3>
+          <p class="feature-desc">멀티 포인트 디스펜스가 가능한 독자 노즐 기술로 최적의 포토레지스트 커버리지와 최소 엣지 비드를 구현합니다.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <h3 class="feature-title">폐루프 제어</h3>
+          <p class="feature-desc">폐루프 피드백 제어 기반의 실시간 스핀 속도 모니터링으로 웨이퍼 전체 &lt;0.5% 막 두께 균일도를 보장합니다.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h3 class="feature-title">약액 절감</h3>
+          <p class="feature-desc">첨단 디스펜스 알고리즘으로 기존 코팅 방식 대비 포토레지스트 소모량을 최대 40% 절감합니다.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3 class="feature-title">EBR 시스템</h3>
+          <p class="feature-desc">솔벤트 린스와 이면 세정이 통합된 엣지 비드 제거(EBR) 시스템으로 리소그래피 준비가 완료된 무결점 웨이퍼를 제공합니다.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <h3 class="feature-title">다층 코팅</h3>
+          <p class="feature-desc">단일 통합 공정 모듈에서 BARC, 포토레지스트, 탑코트를 포함한 순차적 다층 코팅을 지원합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="specs-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Specifications</span>
+        <h2 class="section-title" style="color: white;">기술 사양</h2>
+      </div>
+      <div class="specs-table-wrapper reveal">
+        <table class="specs-table">
+          <tr><th>웨이퍼 사이즈</th><td>200mm / 300mm</td></tr>
+          <tr><th>처리량</th><td>180+ WPH (시간당 웨이퍼 매수)</td></tr>
+          <tr><th>코팅 방식</th><td>정밀 디스펜스 스핀 코팅</td></tr>
+          <tr><th>막 균일도</th><td>&lt;0.5% (3&sigma;) 웨이퍼 전체</td></tr>
+          <tr><th>스핀 속도</th><td>100 ~ 5,000 RPM (폐루프 제어)</td></tr>
+          <tr><th>사용 가능 소재</th><td>포토레지스트, BARC, SOC, SOG, 탑코트, PI</td></tr>
+          <tr><th>디스펜스 노즐</th><td>모듈당 최대 8개 약액 라인</td></tr>
+          <tr><th>EBR</th><td>솔벤트 EBR + 이면 린스</td></tr>
+          <tr><th>풋프린트</th><td>2,600mm &times; 3,400mm &times; 2,300mm (W&times;D&times;H)</td></tr>
+          <tr><th>인터페이스</th><td>SECS/GEM, EAP, SEMI 표준 호환</td></tr>
+        </table>
+      </div>
+      <a href="../index.html" class="back-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        홈으로 돌아가기
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 MKTECH Inc. All Rights Reserved. | 대표 정명균 | Tel 070-7717-3069</p>
+        <div class="footer-policies"><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', true));
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => nav.classList.toggle('mobile-open'));
+    nav.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => nav.classList.remove('mobile-open')); });
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => { revealElements.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); }); };
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
+</body>
+</html>

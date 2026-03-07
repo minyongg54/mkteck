@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wafer Developing System - MKTECH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ===== Product Detail Page ===== */
+    .product-hero {
+      padding-top: 120px;
+      padding-bottom: 80px;
+      background: linear-gradient(180deg, var(--darkest) 0%, var(--dark) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 30% 50%, rgba(79, 195, 247, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(0, 188, 212, 0.04) 0%, transparent 50%);
+    }
+
+    .product-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .product-breadcrumb a {
+      color: rgba(255, 255, 255, 0.4);
+      transition: color var(--transition);
+    }
+
+    .product-breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .product-breadcrumb span {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .product-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+    }
+
+    .product-hero-content {
+      position: relative;
+    }
+
+    .product-hero-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+      padding: 6px 16px;
+      border: 1px solid rgba(79, 195, 247, 0.3);
+      border-radius: 20px;
+    }
+
+    .product-hero-title {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .product-hero-desc {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .product-hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .product-stat {
+      padding: 20px;
+      background: rgba(79, 195, 247, 0.05);
+      border: 1px solid rgba(79, 195, 247, 0.1);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .product-stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .product-stat-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .product-hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      background: transparent;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 50px;
+      border: 1px solid rgba(79, 195, 247, 0.5);
+      cursor: pointer;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all var(--transition);
+    }
+
+    .product-hero-cta:hover {
+      background: var(--primary);
+      color: var(--dark);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(79, 195, 247, 0.2);
+    }
+
+    .product-hero-image {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(79, 195, 247, 0.1);
+    }
+
+    .product-hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .product-hero-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 70%, rgba(10, 22, 40, 0.3) 100%);
+      pointer-events: none;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 64px;
+    }
+
+    .feature-card {
+      padding: 40px 32px;
+      border-radius: 16px;
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      transition: all 0.4s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      border-color: rgba(79, 195, 247, 0.2);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--dark), #1a3a5a);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .feature-desc {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* Specs Section */
+    .specs-section {
+      padding: 100px 0;
+      background: var(--darker);
+    }
+
+    .specs-table-wrapper {
+      margin-top: 64px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(79, 195, 247, 0.1);
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .specs-table th,
+    .specs-table td {
+      padding: 18px 28px;
+      text-align: left;
+      font-size: 15px;
+      border-bottom: 1px solid rgba(79, 195, 247, 0.08);
+    }
+
+    .specs-table th {
+      background: rgba(79, 195, 247, 0.08);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: 35%;
+    }
+
+    .specs-table td {
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(10, 22, 40, 0.5);
+    }
+
+    .specs-table tr:last-child th,
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all var(--transition);
+      margin-top: 40px;
+    }
+
+    .back-link:hover {
+      gap: 12px;
+    }
+
+    @media (max-width: 1024px) {
+      .product-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .product-hero-title {
+        font-size: 36px;
+      }
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-hero {
+        padding-top: 100px;
+        padding-bottom: 60px;
+      }
+      .product-hero-title {
+        font-size: 28px;
+      }
+      .product-hero-stats {
+        grid-template-columns: 1fr;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .specs-table th,
+      .specs-table td {
+        padding: 14px 16px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header scrolled" id="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-text">MKTECH</span>
+      </a>
+      <nav class="nav" id="nav">
+        <div class="nav-item"><a href="../index.html#about" class="nav-link">About</a></div>
+        <div class="nav-item"><a href="../index.html#products" class="nav-link">Products</a></div>
+        <div class="nav-item"><a href="../index.html#process" class="nav-link">Technology</a></div>
+        <div class="nav-item"><a href="../index.html#news" class="nav-link">News</a></div>
+        <div class="nav-item"><a href="../index.html#contact" class="nav-link">Contact</a></div>
+      </nav>
+      <div class="header-actions">
+        <a href="../ko/pages/wafer-developer.html" class="lang-switch">KR</a>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Product Hero ===== -->
+  <section class="product-hero">
+    <div class="container">
+      <div class="product-breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="../index.html#products">Products</a>
+        <span>/</span>
+        <span>Wafer Developing System</span>
+      </div>
+
+      <div class="product-hero-inner">
+        <div class="product-hero-content">
+          <span class="product-hero-label">Developer</span>
+          <h1 class="product-hero-title">Wafer Developing System</h1>
+          <p class="product-hero-desc">
+            High-precision wafer developing equipment engineered for advanced lithography processes.
+            Our developing system ensures uniform developer dispensing and precise puddle control,
+            delivering exceptional CD uniformity and defect-free pattern development for cutting-edge
+            semiconductor manufacturing.
+          </p>
+
+          <div class="product-hero-stats">
+            <div class="product-stat">
+              <div class="product-stat-value">&lt;1nm</div>
+              <div class="product-stat-label">CD Uniformity</div>
+            </div>
+            <div class="product-stat">
+              <div class="product-stat-value">300mm</div>
+              <div class="product-stat-label">Wafer Size</div>
+            </div>
+            <div class="product-stat">
+              <div class="product-stat-value">200+</div>
+              <div class="product-stat-label">WPH Throughput</div>
+            </div>
+          </div>
+
+          <a href="mailto:mktech1@mktechinc.kr" class="product-hero-cta">
+            Request Quote
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="product-hero-image">
+          <img src="../images/wafer-developer.png" alt="Wafer Developing System">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Key Features</span>
+        <h2 class="section-title">Precision Development Technology</h2>
+        <p class="section-desc">Best-in-class wafer developing capabilities for advanced lithography nodes</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3 class="feature-title">High Throughput</h3>
+          <p class="feature-desc">Over 200 wafers per hour with multi-chamber parallel processing and optimized transfer robotics.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="feature-title">Puddle Development</h3>
+          <p class="feature-desc">Advanced puddle dispensing system with precise developer volume and timing control for exceptional CD uniformity.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3 class="feature-title">Temperature Control</h3>
+          <p class="feature-desc">Precision temperature-controlled chambers maintaining &plusmn;0.05&deg;C stability throughout the entire development process.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3 class="feature-title">Modular Design</h3>
+          <p class="feature-desc">Configurable chamber layout supporting 4 to 16 process modules for scalable production capacity.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="feature-title">Defect Prevention</h3>
+          <p class="feature-desc">Integrated rinse and dry technology with N2 blow optimization eliminating watermark defects on developed patterns.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3 class="feature-title">Smart Recipe Management</h3>
+          <p class="feature-desc">Automated recipe optimization with process parameter database and lot-to-lot tracking for consistent results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Specifications ===== -->
+  <section class="specs-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Specifications</span>
+        <h2 class="section-title" style="color: white;">Technical Specifications</h2>
+      </div>
+
+      <div class="specs-table-wrapper reveal">
+        <table class="specs-table">
+          <tr>
+            <th>Wafer Size</th>
+            <td>200mm / 300mm</td>
+          </tr>
+          <tr>
+            <th>Throughput</th>
+            <td>200+ WPH (Wafers Per Hour)</td>
+          </tr>
+          <tr>
+            <th>Development Method</th>
+            <td>Puddle / Dynamic Dispense / Spray</td>
+          </tr>
+          <tr>
+            <th>CD Uniformity</th>
+            <td>&lt;1nm (3&sigma;) across wafer</td>
+          </tr>
+          <tr>
+            <th>Temperature Control</th>
+            <td>&plusmn;0.05&deg;C (Developer & Chamber)</td>
+          </tr>
+          <tr>
+            <th>Developer Chemicals</th>
+            <td>TMAH 2.38%, NMD-3, OPD Series</td>
+          </tr>
+          <tr>
+            <th>Process Chambers</th>
+            <td>4 ~ 16 Modules (Configurable)</td>
+          </tr>
+          <tr>
+            <th>Rinse & Dry</th>
+            <td>DI Water Rinse + N2 Spin Dry</td>
+          </tr>
+          <tr>
+            <th>Footprint</th>
+            <td>2,800mm &times; 3,600mm &times; 2,400mm (W&times;D&times;H)</td>
+          </tr>
+          <tr>
+            <th>Interface</th>
+            <td>SECS/GEM, EAP, SEMI Standards Compliant</td>
+          </tr>
+        </table>
+      </div>
+
+      <a href="../index.html" class="back-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Home
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 MKTECH Inc. All Rights Reserved. | CEO Jeong Myung Kyun | Tel 070-7717-3069</p>
+        <div class="footer-policies">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', true));
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => nav.classList.toggle('mobile-open'));
+    nav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('mobile-open'));
+    });
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+      revealElements.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
+</body>
+</html>

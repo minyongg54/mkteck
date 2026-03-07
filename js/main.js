@@ -33,12 +33,12 @@ window.addEventListener('load', revealOnScroll);
 
 // ===== Hero Rotating Text =====
 const rotatingText = document.getElementById('rotatingText');
-const words = ['스마트 팩토리', 'AI 품질검사', 'IoT 플랫폼', '자동화 시스템'];
+const words = ['Wafer Scrubber', 'Wafer Coater', 'Wafer Developer', 'Refurbishment & Retrofit'];
 let wordIndex = 0;
 
 function rotateWords() {
   rotatingText.style.opacity = 0;
-  rotatingText.style.transform = 'translateY(20px)';
+  rotatingText.style.transform = 'translateY(10px)';
   setTimeout(() => {
     wordIndex = (wordIndex + 1) % words.length;
     rotatingText.textContent = words[wordIndex];
@@ -47,18 +47,19 @@ function rotateWords() {
   }, 400);
 }
 
-rotatingText.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
 setInterval(rotateWords, 3000);
 
 // ===== Hero Particles =====
 const particlesContainer = document.getElementById('particles');
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 40; i++) {
   const particle = document.createElement('div');
   particle.classList.add('particle');
   particle.style.left = Math.random() * 100 + '%';
   particle.style.top = Math.random() * 100 + '%';
-  particle.style.animationDelay = Math.random() * 6 + 's';
-  particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+  particle.style.animationDelay = Math.random() * 8 + 's';
+  particle.style.animationDuration = (5 + Math.random() * 5) + 's';
+  particle.style.width = (2 + Math.random() * 3) + 'px';
+  particle.style.height = particle.style.width;
   particlesContainer.appendChild(particle);
 }
 
