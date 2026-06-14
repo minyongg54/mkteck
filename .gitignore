@@ -1,0 +1,5 @@
+# Unused scratch images
+Gemini_Generated_Image_*.png
+
+# OS files
+.DS_Store

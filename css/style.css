@@ -149,6 +149,17 @@ img {
   border-color: var(--primary);
 }
 
+.lang-switch.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.lang-group {
+  display: inline-flex;
+  gap: 6px;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -886,6 +897,57 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+/* ===== Certifications ===== */
+.cert-grid {
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
+}
+
+.cert-card .news-thumb {
+  height: 8px;
+}
+
+.cert-card .news-title {
+  display: block;
+  -webkit-line-clamp: none;
+  overflow: visible;
+  font-size: 19px;
+  margin-bottom: 18px;
+}
+
+.cert-list {
+  margin: 0;
+}
+
+.cert-list > div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cert-list dt {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray);
+  letter-spacing: 0.3px;
+}
+
+.cert-list dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--gray-dark);
+  word-break: keep-all;
+}
+
+@media (max-width: 1024px) {
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== CTA Section ===== */
