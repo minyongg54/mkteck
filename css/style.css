@@ -1202,7 +1202,11 @@ img {
   }
 
   .hero {
+    height: auto;
     min-height: 100vh;
+    justify-content: flex-start;
+    padding-top: 120px;
+    padding-bottom: 40px;
   }
 
   .hero-title {
@@ -1214,13 +1218,24 @@ img {
   }
 
   .hero-content {
-    padding-bottom: 200px;
+    padding-bottom: 40px;
   }
 
+  /* On mobile, drop the cards out of absolute positioning so they
+     stack below the hero content instead of overlapping the title */
   .hero-cards {
+    position: static;
+    transform: none;
+    left: auto;
+    bottom: auto;
     grid-template-columns: 1fr;
-    bottom: 80px;
     gap: 12px;
+    padding: 0 20px;
+    margin-top: 8px;
+  }
+
+  .hero-scroll {
+    display: none;
   }
 
   .section {
