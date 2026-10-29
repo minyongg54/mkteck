@@ -40,10 +40,13 @@ Products: `spin-coater`, `wafer-developer`, `scrubber-system`.
 - `#header` scroll class toggle, `#hamburger`/`#nav` mobile menu
 - `.reveal` scroll-in animations (add `.reveal` to opt an element in)
 - `#rotatingText` hero word cycler — **the word list is hardcoded in `main.js` and is English-only**; the Korean homepage shows these same English words
-- `#particles` hero particle generation, `.counter[data-target]` count-up via IntersectionObserver
+- `#wafer` hero canvas (rotating wafer graphic, guarded so pages without it are fine), `.counter[data-target]` count-up via IntersectionObserver
 - smooth scroll for `a[href^="#"]`
 
 Product pages don't include `main.js`; they're static.
+
+### Equipment gallery (Supabase-backed)
+The only dynamic part of the site. `pages/gallery.html` (+ `ko/`, `zh/` mirrors) render posts fetched from Supabase via `js/gallery.js`; language comes from `<html lang>` and untranslated fields fall back to Korean. The manager uploads at `/admin/` (`js/admin.js`, Korean only, not linked from nav), which compresses photos in-browser and stores each as `p/<name>` (1600px) and `t/<name>` (640px thumb) in the `gallery` bucket. Shared config, categories and helpers live in `js/gallery-config.js`. Schema, RLS and the manager email allowlist are in `supabase/setup.sql`; setup steps in `supabase/README.md`. Gallery CSS is the "Equipment Gallery" section at the end of `css/style.css`.
 
 ## Conventions when editing
 

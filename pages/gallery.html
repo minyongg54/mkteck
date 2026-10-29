@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment Gallery - MKTECH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body>
+  <header class="header scrolled" id="header">
+    <div class="container header-inner">
+      <a href="../en/index.html" class="logo"><span class="logo-text">MKTECH</span></a>
+      <nav class="nav" id="nav">
+        <div class="nav-item"><a href="../en/index.html#about" class="nav-link">About</a></div>
+        <div class="nav-item"><a href="../en/index.html#products" class="nav-link">Products</a></div>
+        <div class="nav-item"><a href="../en/index.html#process" class="nav-link">Technology</a></div>
+        <div class="nav-item"><a href="../en/index.html#news" class="nav-link">Certifications</a></div>
+        <div class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></div>
+        <div class="nav-item"><a href="../en/index.html#contact" class="nav-link">Contact</a></div>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-group">
+          <a href="gallery.html" class="lang-switch active">EN</a>
+          <a href="../ko/pages/gallery.html" class="lang-switch">KR</a>
+          <a href="../zh/pages/gallery.html" class="lang-switch">CN</a>
+        </div>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="gallery-page">
+    <div class="container">
+      <div class="gallery-head">
+        <span class="section-label">Equipment Gallery</span>
+        <h1>Equipment Gallery</h1>
+        <p class="section-desc">Photos of coating and developing systems and used equipment built, delivered and installed by MKTECH.</p>
+      </div>
+      <div class="gallery-filters" id="galleryFilters"></div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </main>
+
+  <div class="gallery-lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+    <button type="button" class="lb-close" id="lbClose">✕</button>
+    <div class="lb-box">
+      <div class="lb-media">
+        <div class="lb-stage"><img id="lbImg" alt=""></div>
+        <span class="lb-idx" id="lbIdx"></span>
+        <button type="button" class="lb-nav prev" id="lbPrev">‹</button>
+        <button type="button" class="lb-nav next" id="lbNext">›</button>
+        <div class="lb-strip" id="lbStrip"></div>
+      </div>
+      <div class="lb-info">
+        <span class="gallery-cat" id="lbCat"></span>
+        <h2 id="lbTitle"></h2>
+        <p id="lbDesc"></p>
+        <a class="lb-link" id="lbLink" href="#"></a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 MKTECH Inc. All Rights Reserved. | CEO Jeong Myung Kyun | Tel 070-7717-3069</p>
+        <div class="footer-policies"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => nav.classList.toggle('mobile-open'));
+    nav.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => nav.classList.remove('mobile-open')); });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/gallery-config.js"></script>
+  <script src="../js/gallery.js"></script>
+</body>
+</html>
