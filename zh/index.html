@@ -458,7 +458,7 @@
       <div class="facility-split reveal">
         <div>
           <h3 class="record-block-title">自有生产设备</h3>
-          <ul class="equip-list">
+          <ul class="equip-list" id="equipList">
             <li>Compressor <span>2 Set</span></li>
             <li>Cutting M/C <span>3 Set</span></li>
             <li>PVC Welding M/C <span>3 Set</span></li>
@@ -468,8 +468,8 @@
           </ul>
         </div>
         <div>
-          <h3 class="record-block-title">库存构成 &middot; 共 33 Set</h3>
-          <div class="stock-summary">
+          <h3 class="record-block-title" id="stockTitle">库存构成 &middot; 共 33 Set</h3>
+          <div class="stock-summary" id="stockSummary">
             <div class="stock-chip"><strong>18</strong><span>DNS / SOKUDO</span></div>
             <div class="stock-chip"><strong>6</strong><span>MK TECH 自制</span></div>
             <div class="stock-chip"><strong>3</strong><span>SEMES</span></div>
@@ -489,7 +489,7 @@
               <th class="col-qty">数量</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="stockTableBody">
             <tr><td>SKW 80B (Coater / Developer)</td><td class="col-maker">DNS / SOKUDO</td><td class="col-size">8"</td><td class="col-qty">4</td></tr>
             <tr><td>SSW 60A-AR</td><td class="col-maker">DNS</td><td class="col-size">6"</td><td class="col-qty">3</td></tr>
             <tr><td>Spin Etcher (8 Chamber)</td><td class="col-maker">SEMES</td><td class="col-size">12"</td><td class="col-qty">3</td></tr>
@@ -822,6 +822,8 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script src="../js/gallery-config.js"></script>
+  <script src="../js/stock.js"></script>
   <script>
     // Override rotating text with Chinese words
     const rtText = document.getElementById('rotatingText');

@@ -34,6 +34,24 @@
 - 매니저 페이지: `https://mktechinc.kr/admin/` → 로그인 → 사진을 올려 게시
 - 갤러리: `https://mktechinc.kr/ko/pages/gallery.html` 에 바로 나타납니다.
 
+## 6. 생산 설비 · STOCK 관리 (홈페이지 #facility 섹션)
+1. **SQL Editor** 에 `supabase/stock.sql` 을 붙여넣고 Run. 표 3개가 만들어지고, 지금 홈페이지와 같은 값이 들어갑니다.
+2. 관리 페이지 `/admin/` → **생산 설비 · STOCK** 탭에서 고치고 표마다 **저장**.
+   - "총 N Set" 은 STOCK 구성 수량을 더해서 자동으로 나옵니다.
+   - Supabase 에 접속하지 못하면 홈페이지에는 HTML 에 들어 있는 기본값이 보입니다.
+
+## 7. AI 자동 번역 (선택)
+매니저가 한국어를 입력하면 비어 있는 영어·중국어 칸을 AI 가 채웁니다. 번역은 사무실 Mac 의
+Ollama(qwen3:8b)가 하며, Mac 이 꺼져 있으면 "자동 번역을 지금 쓸 수 없습니다" 안내만 나오고
+칸은 직접 입력하면 됩니다. 매니저가 직접 쓴 칸은 덮어쓰지 않습니다.
+1. **SQL Editor** 에 `supabase/translate.sql` 을 붙여넣고 Run.
+2. **Authentication → Users → Add user** 로 번역 전용 계정을 만듭니다.
+   이메일 `translator@mktechinc.kr` (실제 메일함이 없어도 됨), 긴 비밀번호, **Auto Confirm User** 체크.
+   - 다른 이메일을 쓰면 translate.sql 맨 아래 줄도 같은 이메일로 바꿔 실행하세요.
+   - 이 계정은 번역 요청 표만 읽고 쓸 수 있습니다 (갤러리·STOCK 은 못 고침).
+3. 사무실 Mac 의 `~/project/mktech-bridge/` 에서 `.env.example.json` 을 `.env.json` 으로 복사하고
+   비밀번호를 넣은 뒤 브리지를 켭니다 (자세한 내용은 그 폴더의 README).
+
 ## 알아둘 점
 - **무료 플랜 일시정지**: 7일 동안 요청이 하나도 없으면 프로젝트가 일시정지됩니다.
   갤러리가 "사진을 불러오지 못했습니다" 로 나오면 Supabase 대시보드에서 **Restore** 를 누르세요.

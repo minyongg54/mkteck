@@ -17,8 +17,9 @@
   // ---- 로그인 ----
   async function showSession(session) {
     $('loginPanel').hidden = !!session;
-    $('adminPanel').hidden = !session;
+    $('tabs').hidden = !session;
     $('who').hidden = !session;
+    showTab(session ? 'gallery' : null);
     if (!session) return;
     $('whoEmail').textContent = session.user.email;
     const { data: isAdmin } = await db.rpc('is_gallery_admin');
@@ -39,6 +40,27 @@
     }
     showSession(data.session);
   });
+
+  // ---- 탭 (갤러리 / 생산 설비·STOCK) ----
+  function showTab(name) {
+    $('adminPanel').hidden = name !== 'gallery';
+    $('stockPanel').hidden = name !== 'stock';
+    document.querySelectorAll('#tabs [data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+    if (name === 'stock') document.dispatchEvent(new CustomEvent('admin:stock-open'));
+  }
+  $('tabs').addEventListener('click', e => {
+    const b = e.target.closest('[data-tab]');
+    if (b) showTab(b.dataset.tab);
+  });
+
+  // ---- AI 자동 번역 ----
+  AiTranslate.setStatusHandler(state => {
+    if (state === 'unavailable') toast('자동 번역을 지금 쓸 수 없습니다. 직접 입력하거나 비워 두세요');
+  });
+  const openTranslations = () => { $('translations').open = true; };
+  AiTranslate.wire($('titleKo'), { en: $('titleEn'), zh: $('titleZh') }, { onFill: openTranslations });
+  AiTranslate.wire($('descKo'), { en: $('descEn'), zh: $('descZh') }, { onFill: openTranslations });
+  const forgetAuto = () => ['titleEn', 'titleZh', 'descEn', 'descZh'].forEach(id => delete $(id).dataset.auto);
 
   $('logout').addEventListener('click', async () => {
     await db.auth.signOut();
@@ -251,6 +273,7 @@
     $('titleZh').value = p.title_zh || '';
     $('descZh').value = p.desc_zh || '';
     $('translations').open = !!(p.title_en || p.title_zh || p.desc_en || p.desc_zh);
+    forgetAuto();  // 저장돼 있던 번역은 사람이 확인한 값으로 보고 덮어쓰지 않는다
     photos = p.photos.map(name => ({ name }));
     renderPreviews();
     $('formTitle').textContent = '게시물 수정';
@@ -266,6 +289,7 @@
     removed = [];
     editingId = null;
     $('postForm').reset();
+    forgetAuto();
     $('takenOn').value = today();
     $('translations').open = false;
     $('postErr').hidden = true;

@@ -62,6 +62,30 @@
     .plist .editing { outline: 1px solid var(--primary); outline-offset: 4px; border-radius: 4px; }
     .empty { color: var(--gray); font-size: 14px; padding: 20px 0; text-align: center; }
     .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: #4ade80; color: var(--darkest); font-weight: 600; padding: 10px 22px; border-radius: 50px; z-index: 50; }
+    .tabs { display: flex; gap: 6px; margin-bottom: 24px; border-bottom: 1px solid rgba(79,195,247,0.12); }
+    .tabs button { font: inherit; font-size: 15px; background: none; border: none; color: var(--gray); padding: 10px 16px; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; }
+    .tabs button[aria-selected="true"] { color: var(--white); border-bottom-color: var(--primary); font-weight: 600; }
+    #stockPanel { display: grid; gap: 24px; }
+    .stock-intro { margin: 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+    .tr-toggle { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.75); cursor: pointer; }
+    .tr-toggle input { width: auto; }
+    .tr-toggle em { font-style: normal; color: var(--gray); font-size: 12px; }
+    .total { font-family: var(--font-mono); font-size: 14px; font-weight: 500; color: var(--primary); margin-left: 8px; }
+    .etable-wrap { overflow-x: auto; margin-bottom: 16px; }
+    .etable { width: 100%; border-collapse: collapse; min-width: 520px; }
+    .etable th { text-align: left; font-size: 12px; font-weight: 500; color: var(--gray); padding: 0 6px 8px; white-space: nowrap; }
+    .etable td { padding: 4px 6px; vertical-align: middle; }
+    .etable input { padding: 8px 10px; font-size: 14px; }
+    .etable .num { width: 84px; }
+    .etable .tr { display: none; }
+    .show-tr .etable .tr { display: table-cell; }
+    .etable .rowtools { white-space: nowrap; width: 1%; }
+    .etable .rowtools button { font: inherit; font-size: 12px; width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(79,195,247,0.2); background: none; color: rgba(255,255,255,0.7); cursor: pointer; }
+    .etable .rowtools button:disabled { opacity: 0.3; cursor: default; }
+    .etable .rowtools .del:hover { border-color: #f87171; color: #f87171; }
+    .etable tr.removed { display: none; }
+    .editor-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .dirty-note { font-size: 13px; color: #fde68a; }
     @media (max-width: 900px) { .admin-grid { grid-template-columns: 1fr; } }
     @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } .panel { padding: 20px; } .admin-top small { display: none; } }
   </style>
@@ -69,7 +93,7 @@
 <body>
   <div class="admin-top">
     <div class="container">
-      <a href="../ko/pages/gallery.html" class="logo"><span class="logo-text">MKTECH</span><small>갤러리 관리</small></a>
+      <a href="../ko/pages/gallery.html" class="logo"><span class="logo-text">MKTECH</span><small>사이트 관리</small></a>
       <div class="admin-who" id="who" hidden><span><b>●</b> <span id="whoEmail"></span></span><button type="button" class="btn ghost small" id="logout">로그아웃</button></div>
     </div>
   </div>
@@ -89,6 +113,11 @@
         </form>
       </section>
 
+      <div class="tabs" id="tabs" role="tablist" hidden>
+        <button type="button" role="tab" data-tab="gallery" aria-selected="true">장비 갤러리</button>
+        <button type="button" role="tab" data-tab="stock" aria-selected="false">생산 설비 · STOCK</button>
+      </div>
+
       <div class="admin-grid" id="adminPanel" hidden>
         <section class="panel">
           <h2 id="formTitle">새 게시물</h2>
@@ -103,7 +132,7 @@
             <div class="field"><label for="titleKo">제목</label><input id="titleKo" maxlength="120" placeholder="예: 8인치 스핀코터 출하"></div>
             <div class="field"><label for="descKo">설명 <em>(선택)</em></label><textarea id="descKo" placeholder="장비 사양, 납품처, 설치 내용 등"></textarea></div>
             <details id="translations">
-              <summary>영어 · 중국어 번역 (선택, 비우면 한국어로 표시)</summary>
+              <summary>영어 · 중국어 번역 (선택 · 한국어를 쓰면 AI 가 빈 칸을 채웁니다, 비우면 한국어로 표시)</summary>
               <div class="field"><label for="titleEn">제목 (English)</label><input id="titleEn" maxlength="120"></div>
               <div class="field"><label for="descEn">설명 (English)</label><textarea id="descEn"></textarea></div>
               <div class="field"><label for="titleZh">제목 (中文)</label><input id="titleZh" maxlength="120"></div>
@@ -128,6 +157,23 @@
           <ul class="plist" id="postList"></ul>
         </section>
       </div>
+
+      <div id="stockPanel" hidden>
+        <p class="sub stock-intro"><span>홈페이지 "생산 설비 및 보유 STOCK" 섹션에 나오는 값입니다. 표마다 고친 뒤 <b>저장</b>을 누르면 바로 반영됩니다. 한국어를 쓰면 AI 가 빈 번역 칸을 채웁니다.</span>
+          <label class="tr-toggle"><input type="checkbox" id="showTr"> 영어 · 중국어 칸 보기 <em>(비우면 한국어로 표시)</em></label></p>
+        <section class="panel" data-editor="facility_equipment">
+          <h2>보유 생산 설비</h2>
+          <p class="sub">단위는 Set 으로 표시됩니다.</p>
+        </section>
+        <section class="panel" data-editor="stock_groups">
+          <h2>보유 STOCK 구성 <span class="total" data-total></span></h2>
+          <p class="sub">분류별 수량의 합계가 "총 N Set" 으로 표시됩니다.</p>
+        </section>
+        <section class="panel" data-editor="stock_items">
+          <h2>STOCK 상세 표</h2>
+          <p class="sub">홈페이지 표에 나오는 순서대로 정렬됩니다. ↑ ↓ 로 순서를 바꿀 수 있습니다.</p>
+        </section>
+      </div>
     </div>
   </main>
 
@@ -135,6 +181,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
   <script src="../js/gallery-config.js"></script>
+  <script src="../js/ai-translate.js"></script>
   <script src="../js/admin.js"></script>
+  <script src="../js/admin-stock.js"></script>
 </body>
 </html>

@@ -14,9 +14,12 @@ const GALLERY_CATEGORIES = [
   { id: 'used',  page: 'used-equipment.html',  label: { ko: 'DNS 중고장비',    en: 'Used Equipment',  zh: '二手设备' } },
 ];
 
+// 페이지당 하나만 만든다 (관리 페이지의 여러 스크립트가 같은 로그인 세션을 씀)
+let galleryClientInstance = null;
 function galleryClient() {
   if (!GALLERY_CONFIG.url || !GALLERY_CONFIG.anonKey || !window.supabase) return null;
-  return window.supabase.createClient(GALLERY_CONFIG.url, GALLERY_CONFIG.anonKey);
+  galleryClientInstance ||= window.supabase.createClient(GALLERY_CONFIG.url, GALLERY_CONFIG.anonKey);
+  return galleryClientInstance;
 }
 
 // size: 'p' = 원본(긴 변 1600px), 't' = 썸네일(긴 변 640px)

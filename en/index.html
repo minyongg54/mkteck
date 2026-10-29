@@ -457,7 +457,7 @@
       <div class="facility-split reveal">
         <div>
           <h3 class="record-block-title">Production Equipment</h3>
-          <ul class="equip-list">
+          <ul class="equip-list" id="equipList">
             <li>Compressor <span>2 Set</span></li>
             <li>Cutting M/C <span>3 Set</span></li>
             <li>PVC Welding M/C <span>3 Set</span></li>
@@ -467,8 +467,8 @@
           </ul>
         </div>
         <div>
-          <h3 class="record-block-title">Stock Composition &middot; 33 Set Total</h3>
-          <div class="stock-summary">
+          <h3 class="record-block-title" id="stockTitle">Stock Composition &middot; 33 Set Total</h3>
+          <div class="stock-summary" id="stockSummary">
             <div class="stock-chip"><strong>18</strong><span>DNS / SOKUDO</span></div>
             <div class="stock-chip"><strong>6</strong><span>MK TECH in-house</span></div>
             <div class="stock-chip"><strong>3</strong><span>SEMES</span></div>
@@ -488,7 +488,7 @@
               <th class="col-qty">Qty</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="stockTableBody">
             <tr><td>SKW 80B (Coater / Developer)</td><td class="col-maker">DNS / SOKUDO</td><td class="col-size">8"</td><td class="col-qty">4</td></tr>
             <tr><td>SSW 60A-AR</td><td class="col-maker">DNS</td><td class="col-size">6"</td><td class="col-qty">3</td></tr>
             <tr><td>Spin Etcher (8 Chamber)</td><td class="col-maker">SEMES</td><td class="col-size">12"</td><td class="col-qty">3</td></tr>
@@ -820,5 +820,7 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script src="../js/gallery-config.js"></script>
+  <script src="../js/stock.js"></script>
 </body>
 </html>

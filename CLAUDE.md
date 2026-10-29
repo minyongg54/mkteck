@@ -48,6 +48,10 @@ Product pages don't include `main.js`; they're static.
 ### Equipment gallery (Supabase-backed)
 The only dynamic part of the site. `pages/gallery.html` (+ `ko/`, `zh/` mirrors) render posts fetched from Supabase via `js/gallery.js`; language comes from `<html lang>` and untranslated fields fall back to Korean. The manager uploads at `/admin/` (`js/admin.js`, Korean only, not linked from nav), which compresses photos in-browser and stores each as `p/<name>` (1600px) and `t/<name>` (640px thumb) in the `gallery` bucket. Shared config, categories and helpers live in `js/gallery-config.js`. Schema, RLS and the manager email allowlist are in `supabase/setup.sql`; setup steps in `supabase/README.md`. Gallery CSS is the "Equipment Gallery" section at the end of `css/style.css`.
 
+The homepage `#facility` section (equipment, stock groups, stock table) is also manager-editable: `js/stock.js` re-renders it from Supabase (`supabase/stock.sql`) via plain REST fetch, leaving the built-in HTML in place if the fetch fails — so keep that HTML as a sensible fallback. Edited in the admin "생산 설비 · STOCK" tab (`js/admin-stock.js`).
+
+Admin AI translation (`js/ai-translate.js`): Korean input fills empty EN/ZH fields via a `translate_jobs` queue (`supabase/translate.sql`) processed by a bridge on the office Mac (`~/project/mktech-bridge`, Ollama qwen3:8b, outside this repo because everything here is publicly deployed). Never overwrites fields a person typed; failure just leaves fields for manual entry.
+
 ## Conventions when editing
 
 - Keep the EN and KO copies in sync — content edits land in two files.
